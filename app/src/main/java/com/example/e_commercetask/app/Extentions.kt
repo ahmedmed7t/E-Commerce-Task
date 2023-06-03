@@ -2,7 +2,9 @@ package com.example.e_commercetask.app
 
 import android.app.Activity
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import com.example.e_commercetask.R
 import com.google.android.material.snackbar.Snackbar
 
@@ -13,6 +15,16 @@ fun View.show() {
 
 fun View.hide() {
     this.visibility = View.GONE
+}
+
+// EditText extensions
+
+fun EditText.hideError(){
+    this.background = ContextCompat.getDrawable(context, R.drawable.edit_text_background)
+}
+
+fun EditText.showError(){
+    this.background = ContextCompat.getDrawable(context, R.drawable.error_edit_text_background)
 }
 
 // Activity extensions

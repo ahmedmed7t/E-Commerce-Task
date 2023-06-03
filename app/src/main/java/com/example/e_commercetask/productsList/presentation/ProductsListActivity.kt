@@ -1,4 +1,4 @@
-package com.example.e_commercetask.productsList
+package com.example.e_commercetask.productsList.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
