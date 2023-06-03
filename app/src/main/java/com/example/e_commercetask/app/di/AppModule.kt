@@ -1,11 +1,15 @@
 package com.example.e_commercetask.app.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.example.e_commercetask.BuildConfig
 import com.example.e_commercetask.app.api.ApiService
+import com.example.e_commercetask.app.models.Constants
 import com.example.e_commercetask.app.models.ErrorInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -47,4 +51,10 @@ class AppModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext appContext: Context): SharedPreferences =
+        appContext.getSharedPreferences(Constants.sharedPreferencesName, Context.MODE_PRIVATE)
 }
