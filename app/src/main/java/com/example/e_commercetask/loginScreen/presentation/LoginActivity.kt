@@ -12,6 +12,7 @@ import com.example.e_commercetask.app.showError
 import com.example.e_commercetask.databinding.ActivityLoginBinding
 import com.example.e_commercetask.loginScreen.domain.models.ValidateLoginErrors
 import com.example.e_commercetask.loginScreen.domain.usecase.ValidateLoginDataUseCase
+import com.example.e_commercetask.loginScreen.presentation.models.LoginUiState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
+        listenToViewModelValues()
     }
 
     private fun initViews() {
@@ -35,10 +37,30 @@ class LoginActivity : AppCompatActivity() {
                         )
                     )
                 ) {
-                    Toast.makeText(this@LoginActivity, "Success", Toast.LENGTH_LONG).show()
-                } else
-                    Toast.makeText(this@LoginActivity, "Fail", Toast.LENGTH_LONG).show()
+                    loginLoading.show()
+                    viewModel.loginUser(
+                        loginUserName.text.toString(),
+                        loginPassword.text.toString()
+                    )
+                }
             }
+        }
+    }
+
+    private fun listenToViewModelValues() {
+        viewModel.loginState.observe(this) { loginState ->
+            binding.loginLoading.hide()
+            when (loginState) {
+                is LoginUiState.ErrorState -> Toast.makeText(
+                    this,
+                    loginState.errorMessage,
+                    Toast.LENGTH_LONG
+                ).show()
+
+                LoginUiState.SuccessState -> Toast.makeText(this, "Success", Toast.LENGTH_LONG)
+                    .show()
+            }
+
         }
     }
 
@@ -112,8 +134,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showPasswordError(errorMessage: String) {
         binding.apply {
-            loginUserName.showError()
-            loginUserNameError.show()
+            loginPassword.showError()
+            loginPasswordError.show()
             loginPasswordError.text = errorMessage
         }
     }

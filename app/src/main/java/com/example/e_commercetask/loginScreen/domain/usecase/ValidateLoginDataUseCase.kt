@@ -9,14 +9,14 @@ class ValidateLoginDataUseCase @Inject constructor() {
 
         result[UserName] =  if(userName.isEmpty())
             ValidateLoginErrors.Empty
-        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(userName).matches())
+        else if (userName.count() < 8)
             ValidateLoginErrors.Validation_Error
         else
             ValidateLoginErrors.None
 
         result[Password] =  if(password.isEmpty())
             ValidateLoginErrors.Empty
-        else if (password.count() < 8)
+        else if (password.count() < 6)
             ValidateLoginErrors.Validation_Error
         else
             ValidateLoginErrors.None

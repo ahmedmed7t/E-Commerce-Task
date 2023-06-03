@@ -2,6 +2,8 @@ package com.example.e_commercetask.loginScreen.di
 
 import com.example.e_commercetask.loginScreen.data.data_source.LoginDataSource
 import com.example.e_commercetask.loginScreen.data.data_source.LoginDataSourceImp
+import com.example.e_commercetask.loginScreen.data.local_data_sorce.LocalLoginDS
+import com.example.e_commercetask.loginScreen.data.local_data_sorce.LocalLoginDSImp
 import com.example.e_commercetask.loginScreen.data.repository.LoginRepositoryImp
 import com.example.e_commercetask.loginScreen.domain.repository.LoginRepository
 import dagger.Binds
@@ -15,6 +17,9 @@ abstract class LoginModule {
 
     @Binds
     abstract fun bindRemoteDataSource(remoteDataSource: LoginDataSourceImp): LoginDataSource
+
+    @Binds
+    abstract fun bindLocalDataSource(localDataSource: LocalLoginDSImp): LocalLoginDS
 
     @Binds
     abstract fun bindRepository(repositoryImp: LoginRepositoryImp): LoginRepository

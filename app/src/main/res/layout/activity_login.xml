@@ -29,6 +29,8 @@
         android:background="@drawable/edit_text_background"
         android:hint="@string/username"
         android:inputType="text"
+        android:text="mor_2314"
+        android:focusable="false"
         android:paddingHorizontal="@dimen/_4sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
@@ -52,6 +54,8 @@
         android:autofillHints="false"
         android:background="@drawable/edit_text_background"
         android:hint="@string/password"
+        android:text="83r5^_"
+        android:focusable="false"
         android:inputType="textPassword"
         android:paddingHorizontal="@dimen/_4sdp"
         android:textColor="@color/black"
@@ -91,4 +95,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
+
+    <ProgressBar
+        android:id="@+id/loginLoading"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
