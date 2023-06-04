@@ -8,4 +8,7 @@
     <string name="enter_valid_password">Enter Valid Password</string>
     <string name="enter_a_username">Enter a Username</string>
     <string name="enter_a_password">Enter a Password</string>
+    <string name="add_to_cart">Add To cart</string>
+    <string name="search">search</string>
+    <string name="no_items_found">No Items Found</string>
 </resources>

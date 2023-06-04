@@ -8,12 +8,12 @@ import javax.inject.Inject
 class LoginUseCase @Inject constructor(
     private val loginRepository: LoginRepository
 ) {
-    suspend operator fun invoke(userName: String, password: String): LoginNetworkState{
+    suspend operator fun invoke(userName: String, password: String): LoginNetworkState {
         loginRepository.loginUser(userName, password).let { response ->
-            return if(response.isSuccessful){
+            return if (response.isSuccessful) {
                 LoginNetworkState.LoginSuccess(response.body()?.token ?: "")
-            }else{
-                LoginNetworkState.LoginFail(response.message()?: "")
+            } else {
+                LoginNetworkState.LoginFail(response.message() ?: "")
             }
         }
     }
