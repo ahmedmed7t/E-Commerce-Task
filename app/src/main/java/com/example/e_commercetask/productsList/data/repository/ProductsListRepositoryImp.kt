@@ -5,4 +5,6 @@ import com.example.e_commercetask.productsList.domain.repository.ProductsListRep
 import javax.inject.Inject
 
 class ProductsListRepositoryImp @Inject constructor(private val dataSource: ProductsListDataSource): ProductsListRepository {
+    override suspend fun loadAllProducts() =
+        dataSource.loadAllProducts()
 }

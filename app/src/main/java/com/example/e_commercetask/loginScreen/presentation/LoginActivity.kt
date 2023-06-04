@@ -1,5 +1,6 @@
 package com.example.e_commercetask.loginScreen.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -13,6 +14,7 @@ import com.example.e_commercetask.databinding.ActivityLoginBinding
 import com.example.e_commercetask.loginScreen.domain.models.ValidateLoginErrors
 import com.example.e_commercetask.loginScreen.domain.usecase.ValidateLoginDataUseCase
 import com.example.e_commercetask.loginScreen.presentation.models.LoginUiState
+import com.example.e_commercetask.productsList.presentation.ProductsListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,6 +46,10 @@ class LoginActivity : AppCompatActivity() {
                     )
                 }
             }
+
+            loginSkip.setOnClickListener {
+                navigateToProductsScreen()
+            }
         }
     }
 
@@ -57,8 +63,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
 
-                LoginUiState.SuccessState -> Toast.makeText(this, "Success", Toast.LENGTH_LONG)
-                    .show()
+                LoginUiState.SuccessState -> navigateToProductsScreen()
             }
 
         }
@@ -138,5 +143,9 @@ class LoginActivity : AppCompatActivity() {
             loginPasswordError.show()
             loginPasswordError.text = errorMessage
         }
+    }
+
+    private fun navigateToProductsScreen(){
+        startActivity(Intent(this, ProductsListActivity::class.java))
     }
 }
