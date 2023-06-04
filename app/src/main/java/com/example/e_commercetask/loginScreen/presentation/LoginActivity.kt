@@ -147,5 +147,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToProductsScreen(){
         startActivity(Intent(this, ProductsListActivity::class.java))
+        finishAffinity()
     }
 }

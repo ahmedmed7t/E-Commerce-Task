@@ -12,7 +12,8 @@ private val HEADER_ITEM = 0
 private val PRODUCT_ITEM = 1
 
 class ProductsRecyclerAdapter(
-    private var productList: ArrayList<ProductItemModel>
+    private var productList: ArrayList<ProductItemModel>,
+    private val productHandler: ProductListHandler
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class HeaderViewHolder(val binding: ProductHeaderItemViewBinding) :
@@ -50,6 +51,12 @@ class ProductsRecyclerAdapter(
                 productItemTitle.text = productList[position].title
                 productItemPrice.text = "${productList[position].price} EGP"
                 Glide.with(root.context).load(productList[position].image).into(productItemImage)
+                root.setOnClickListener {
+                    productHandler.onProductClicked(productList[position])
+                }
+                productAddToCart.setOnClickListener {
+                    productHandler.onAddProductToCart(productList[position])
+                }
             }
         }
     }
