@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
+import com.example.e_commercetask.R
 import com.example.e_commercetask.app.hide
 import com.example.e_commercetask.app.show
 import com.example.e_commercetask.app.showErrorToast
+import com.example.e_commercetask.app.showToast
 import com.example.e_commercetask.databinding.ActivityProductsListBinding
 import com.example.e_commercetask.detailsScreen.ProductDetailsActivity
 import com.example.e_commercetask.productsList.data.models.ProductItemModel
@@ -77,6 +79,7 @@ class ProductsListActivity : AppCompatActivity(), ProductListHandler {
     }
 
     override fun onAddProductToCart(product: ProductItemModel) {
-
+        viewModel.addItemToCart(product)
+        showToast(getString(R.string.product_added_to_your_cart))
     }
 }

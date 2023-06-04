@@ -35,6 +35,13 @@ fun Activity.showErrorToast(text: String) {
     snackBar.show()
 }
 
+fun Activity.showToast(text: String) {
+    val parent: View = findViewById(android.R.id.content)
+    val snackBar: Snackbar = Snackbar.make(parent, text, Snackbar.LENGTH_LONG)
+    snackBar.view.background = AppCompatResources.getDrawable(this, R.drawable.toast_background)
+    snackBar.show()
+}
+
 // String extensions
 fun String.toOriginalImage(): String {
     return "https://image.tmdb.org/t/p/original$this"

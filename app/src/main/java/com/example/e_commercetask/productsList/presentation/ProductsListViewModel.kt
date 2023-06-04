@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.e_commercetask.loginScreen.presentation.models.LoginUiState
 import com.example.e_commercetask.productsList.data.models.ProductItemModel
 import com.example.e_commercetask.productsList.domain.models.LoadProductsNetworkState
+import com.example.e_commercetask.productsList.domain.usecase.AddProductToCartUseCase
 import com.example.e_commercetask.productsList.domain.usecase.CategorizeProductListUseCase
 import com.example.e_commercetask.productsList.domain.usecase.FilterProductListUseCase
 import com.example.e_commercetask.productsList.domain.usecase.LoadProductsUseCase
@@ -19,18 +20,20 @@ import javax.inject.Inject
 class ProductsListViewModel @Inject constructor(
     private val loadProductsUseCase: LoadProductsUseCase,
     private val categorizeProductListUseCase: CategorizeProductListUseCase,
-    private val filterProductListUseCase: FilterProductListUseCase
-): ViewModel() {
+    private val filterProductListUseCase: FilterProductListUseCase,
+    private val addProductToCartUseCase: AddProductToCartUseCase
+) : ViewModel() {
 
     private val _loadProductsState = MutableLiveData<ProductsUIState>()
     val loadProductsState: LiveData<ProductsUIState> get() = _loadProductsState
 
-    fun loadAllProducts(){
+    fun loadAllProducts() {
         viewModelScope.launch {
             loadProductsUseCase.invoke().let {
-                when(it){
+                when (it) {
                     is LoadProductsNetworkState.LoadFail ->
                         _loadProductsState.value = ProductsUIState.Fail(it.errorMessage)
+
                     is LoadProductsNetworkState.LoadSuccess -> {
                         _loadProductsState.value = ProductsUIState.Success(
                             products = categorizeProductListUseCase(it.products)
@@ -41,11 +44,20 @@ class ProductsListViewModel @Inject constructor(
         }
     }
 
-    fun filterList(keyword: String): ArrayList<ProductItemModel>{
-        return  if(_loadProductsState.value is ProductsUIState.Success){
-            filterProductListUseCase((_loadProductsState.value as ProductsUIState.Success).products, keyword)
-        }else{
+    fun filterList(keyword: String): ArrayList<ProductItemModel> {
+        return if (_loadProductsState.value is ProductsUIState.Success) {
+            filterProductListUseCase(
+                (_loadProductsState.value as ProductsUIState.Success).products,
+                keyword
+            )
+        } else {
             arrayListOf()
+        }
+    }
+
+    fun addItemToCart(productItemModel: ProductItemModel) {
+        viewModelScope.launch {
+            addProductToCartUseCase(productItemModel)
         }
     }
 }

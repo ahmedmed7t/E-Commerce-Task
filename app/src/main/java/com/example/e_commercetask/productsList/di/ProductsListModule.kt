@@ -18,7 +18,8 @@ abstract class ProductsListModule {
 
     @Binds
     abstract fun bindRemoteDataSource(remoteDataSource: ProductsListDataSourceImp): ProductsListDataSource
-  @Binds
+
+    @Binds
     abstract fun bindLocalDataSource(localDataSource: LocalProductsListDataSourceImp): LocalProductsListDataSource
 
     @Binds

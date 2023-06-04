@@ -2,10 +2,13 @@ package com.example.e_commercetask.app.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.room.Room
 import com.example.e_commercetask.BuildConfig
 import com.example.e_commercetask.app.api.ApiService
 import com.example.e_commercetask.app.models.Constants
 import com.example.e_commercetask.app.models.ErrorInterceptor
+import com.example.e_commercetask.app.room.ProductsDao
+import com.example.e_commercetask.app.room.ProductsDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,4 +60,16 @@ class AppModule {
     @Singleton
     fun provideSharedPreferences(@ApplicationContext appContext: Context): SharedPreferences =
         appContext.getSharedPreferences(Constants.sharedPreferencesName, Context.MODE_PRIVATE)
+
+
+
+    @Provides
+    @Singleton
+    fun provideLocalDataBase(@ApplicationContext appContext: Context): ProductsDataBase =
+        Room.databaseBuilder(appContext, ProductsDataBase::class.java, Constants.roomDatabaseName).build()
+
+    @Provides
+    fun provideProductsDao(productsDataBase: ProductsDataBase): ProductsDao {
+        return productsDataBase.productsDao()
+    }
 }
