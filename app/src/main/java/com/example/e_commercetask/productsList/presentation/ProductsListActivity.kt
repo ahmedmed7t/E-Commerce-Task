@@ -9,16 +9,18 @@ import com.example.e_commercetask.app.hide
 import com.example.e_commercetask.app.show
 import com.example.e_commercetask.app.showErrorToast
 import com.example.e_commercetask.databinding.ActivityProductsListBinding
+import com.example.e_commercetask.detailsScreen.ProductDetailsActivity
 import com.example.e_commercetask.productsList.data.models.ProductItemModel
+import com.example.e_commercetask.productsList.presentation.adapter.ProductListHandler
 import com.example.e_commercetask.productsList.presentation.adapter.ProductsRecyclerAdapter
 import com.example.e_commercetask.productsList.presentation.models.ProductsUIState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProductsListActivity : AppCompatActivity() {
+class ProductsListActivity : AppCompatActivity(), ProductListHandler {
     private lateinit var binding: ActivityProductsListBinding
     private val viewModel: ProductsListViewModel by viewModels()
-    private val productsAdapter = ProductsRecyclerAdapter(arrayListOf())
+    private val productsAdapter = ProductsRecyclerAdapter(arrayListOf(), this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductsListBinding.inflate(layoutInflater)
@@ -69,4 +71,12 @@ class ProductsListActivity : AppCompatActivity() {
                 productsRecyclerView.show()
             }
         }
+
+    override fun onProductClicked(product: ProductItemModel) {
+        ProductDetailsActivity.getDetailsIntent(this, product)
+    }
+
+    override fun onAddProductToCart(product: ProductItemModel) {
+
+    }
 }

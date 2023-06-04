@@ -1,5 +1,9 @@
 package com.example.e_commercetask.productsList.data.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class ProductItemModel(
     val category: String = "",
     val description: String = "",
@@ -8,4 +12,4 @@ data class ProductItemModel(
     val price: String = "",
     val title: String = "",
     val isHeader: Boolean = false
-)
+) : Parcelable
