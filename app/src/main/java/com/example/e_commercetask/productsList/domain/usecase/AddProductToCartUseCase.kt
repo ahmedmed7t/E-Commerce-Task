@@ -11,7 +11,7 @@ class AddProductToCartUseCase @Inject constructor(
     suspend operator fun invoke(product: ProductItemModel)  {
         val oldProduct = productsListRepository.getProductById(productId = product.id)
         if (oldProduct == null) {
-            productsListRepository.addProductToCart(product)
+            productsListRepository.addProductToCart(product.copy(quantity = 1))
         } else {
             productsListRepository.updateProduct(
                 oldProduct.copy(quantity = oldProduct.quantity + 1)

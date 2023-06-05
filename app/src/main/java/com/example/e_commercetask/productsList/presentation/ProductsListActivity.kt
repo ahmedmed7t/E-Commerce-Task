@@ -1,15 +1,16 @@
 package com.example.e_commercetask.productsList.presentation
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.e_commercetask.R
 import com.example.e_commercetask.app.hide
 import com.example.e_commercetask.app.show
 import com.example.e_commercetask.app.showErrorToast
 import com.example.e_commercetask.app.showToast
+import com.example.e_commercetask.cartScreen.presentation.CartActivity
 import com.example.e_commercetask.databinding.ActivityProductsListBinding
 import com.example.e_commercetask.detailsScreen.ProductDetailsActivity
 import com.example.e_commercetask.productsList.data.models.ProductItemModel
@@ -42,6 +43,9 @@ class ProductsListActivity : AppCompatActivity(), ProductListHandler {
             }
             productsSearch.addTextChangedListener {
                 viewProductsList(viewModel.filterList(it.toString()))
+            }
+            openCart.setOnClickListener {
+                startActivity(Intent(this@ProductsListActivity, CartActivity::class.java))
             }
         }
     }

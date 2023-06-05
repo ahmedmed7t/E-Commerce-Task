@@ -13,7 +13,7 @@ data class ProductItemModel(
     val category: String = "",
     val description: String = "",
     val image: String = "",
-    val price: String = "",
+    val price: Double = 0.0,
     val title: String = "",
     val quantity: Int = 0,
     val isHeader: Boolean = false
