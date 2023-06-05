@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.example.e_commercetask.R
+import com.example.e_commercetask.app.showToast
 import com.example.e_commercetask.databinding.ActivityProductDetailsBinding
 import com.example.e_commercetask.databinding.ActivityProductsListBinding
 import com.example.e_commercetask.productsList.data.models.ProductItemModel
@@ -44,8 +45,14 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        binding.productDetailsBackButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+        binding.apply {
+            productDetailsBackButton.setOnClickListener {
+                onBackPressedDispatcher.onBackPressed()
+            }
+            productDetailsAddToCart.setOnClickListener {
+                viewModel.addItemToCart()
+                showToast(getString(R.string.product_added_to_your_cart))
+            }
         }
     }
 
