@@ -15,7 +15,13 @@
         android:theme="@style/Theme.ECommerceTask"
         tools:targetApi="31">
         <activity
-            android:name=".loginScreen.LoginActivity"
+            android:name=".cartScreen.presentation.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".detailsScreen.ProductDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".loginScreen.presentation.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +30,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".productsList.ProductsListActivity"
-            android:exported="false"/>
+            android:name=".productsList.presentation.ProductsListActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
